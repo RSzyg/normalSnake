@@ -1,5 +1,6 @@
 #include "controller.h"
 #include "tools.h"
+#include "point.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -36,8 +37,12 @@ void Controller::Main() {
     sleep_for(milliseconds(5000));
     // while (true) {
         Select();
-        CreateScene();
+        // CreateScene();
     // }
+    Point *p1 = new Point(5, 5);
+    Point *p2 = new Point(8, 8);
+    p1->Block();
+    p2->Circle();
 
     sleep_for(milliseconds(5000));
 
