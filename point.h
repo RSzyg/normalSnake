@@ -3,11 +3,13 @@
 
 class Point {
     public:
-        Point(const int inx, const int iny): x(inx), y(iny) {}
+        Point(const int x, const int y): _x(x), _y(y) {}
         void Block();
         void Circle();
+        int x();
+        int y();
     private:
-        int x, y;
+        int _x, _y;
 };
 
 #endif

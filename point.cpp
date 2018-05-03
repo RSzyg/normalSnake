@@ -4,13 +4,21 @@
 using std::cout;
 
 void Point::Block() {
-    SetCursorPos(x, y);
+    SetCursorPos(_x, _y);
     cout << "◼";
     fflush(stdout);
 }
 
 void Point::Circle() {
-    SetCursorPos(x, y);
+    SetCursorPos(_x, _y);
     cout << "●";
     fflush(stdout);
+}
+
+int Point::x() {
+    return _x;
+}
+
+int Point::y() {
+    return _y;
 }

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <ncurses.h>
 using std::cout;
 using std::cin;
 using std::endl;
@@ -12,13 +13,14 @@ using std::chrono::milliseconds;
 
 void Controller::Start() {
     system("clear");
-	cout << "    ■ ■ ■      ■           ■          ■          ■       ■    ■ ■ ■ ■ ■  " << endl;
-	cout << "  ■       ■    ■ ■         ■         ■ ■         ■     ■      ■          " << endl;
-	cout << "    ■          ■   ■       ■        ■   ■        ■   ■        ■          " << endl;
-	cout << "      ■        ■     ■     ■       ■ ■ ■ ■       ■ ■          ■ ■ ■ ■ ■  " << endl;
-	cout << "        ■      ■       ■   ■      ■       ■      ■   ■        ■          " << endl;
-	cout << "  ■       ■    ■         ■ ■     ■         ■     ■     ■      ■          " << endl;
-	cout << "    ■ ■ ■      ■           ■    ■           ■    ■       ■    ■ ■ ■ ■ ■  " << endl;
+	printw("    ■ ■ ■      ■           ■          ■          ■       ■    ■ ■ ■ ■ ■  ");
+	printw("  ■       ■    ■ ■         ■         ■ ■         ■     ■      ■          ");
+	printw("    ■          ■   ■       ■        ■   ■        ■   ■        ■          ");
+	printw("      ■        ■     ■     ■       ■ ■ ■ ■       ■ ■          ■ ■ ■ ■ ■  ");
+	printw("        ■      ■       ■   ■      ■       ■      ■   ■        ■          ");
+	printw("  ■       ■    ■         ■ ■     ■         ■     ■     ■      ■          ");
+	printw("    ■ ■ ■      ■           ■    ■           ■    ■       ■    ■ ■ ■ ■ ■  ");
+    refresh();
 }
 
 void Controller::CreateScene() {
@@ -27,18 +29,27 @@ void Controller::CreateScene() {
 
 void Controller::Select() {
     system("clear");
+    printw("按任意键继续");
+    getch();
 }
 
 void Controller::Main() {
-    system("stty -echo");
     HideCursor();
+
+    int ch;
+
+    initscr();
+    raw();
+    keypad(stdscr, TRUE);
+    noecho();
 
     Start();
     sleep_for(milliseconds(5000));
-    // while (true) {
+    while (true) {
         Select();
-        // CreateScene();
-    // }
+        CreateScene();
+    }
+
     Point *p1 = new Point(5, 5);
     Point *p2 = new Point(8, 8);
     p1->Block();
@@ -46,6 +57,7 @@ void Controller::Main() {
 
     sleep_for(milliseconds(5000));
 
+    endwin();
+
     ShowCursor();
-    system("stty echo");
 }
