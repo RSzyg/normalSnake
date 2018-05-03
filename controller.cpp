@@ -1,6 +1,7 @@
 #include "controller.h"
 #include "tools.h"
 #include "point.h"
+#include "locale.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -29,19 +30,17 @@ void Controller::CreateScene() {
 
 void Controller::Select() {
     system("clear");
-    printw("按任意键继续");
+    int ch;
+    addstr("按任意键继续。。。");
+    // system("clear");
+    refresh();
     getch();
 }
 
 void Controller::Main() {
-    HideCursor();
-
-    int ch;
-
+    setlocale(LC_CTYPE, "");
     initscr();
-    raw();
-    keypad(stdscr, TRUE);
-    noecho();
+    HideCursor();
 
     Start();
     sleep_for(milliseconds(5000));
@@ -57,7 +56,6 @@ void Controller::Main() {
 
     sleep_for(milliseconds(5000));
 
-    endwin();
-
     ShowCursor();
+    system("stty echo");
 }
