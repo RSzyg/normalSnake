@@ -30,7 +30,7 @@ void Controller::Select() {
 
 void Controller::Main() {
     system("stty -echo");
-    HIDE_CURSOR();
+    HideCursor();
 
     Start();
     sleep_for(milliseconds(5000));
@@ -41,6 +41,6 @@ void Controller::Main() {
 
     sleep_for(milliseconds(5000));
 
-    SHOW_CURSOR();
+    ShowCursor();
     system("stty echo");
 }

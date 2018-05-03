@@ -1,10 +1,14 @@
 #include "tools.h"
 #include <cstdio>
 
-void HIDE_CURSOR() {
+void HideCursor() {
     printf("\033[?25l");
 }
 
-void SHOW_CURSOR() {
+void ShowCursor() {
     printf("\033[?25h");
+}
+
+void SetCursorPos(int x, int y) {
+    printf("\033[%d;%dH", (x), (y));
 }

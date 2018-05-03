@@ -1,7 +1,8 @@
 #ifndef TOOLS_H
 #define TOOLS_H
 
-void HIDE_CURSOR();
-void SHOW_CURSOR();
+void HideCursor();
+void ShowCursor();
+void SetCursorPos(int x, int y);
 
 #endif // TOOLS_H
