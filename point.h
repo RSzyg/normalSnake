@@ -6,6 +6,7 @@ class Point {
         Point(const int x, const int y): _x(x), _y(y) {}
         void Block();
         void Circle();
+        void Clear();
         int x();
         int y();
     private:

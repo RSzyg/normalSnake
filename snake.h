@@ -2,15 +2,18 @@
 #define SNAKE_H
 
 #include <deque>
+#include <ncurses.h>
 #include "point.h"
 
 class Snake {
     public:
         Snake() {
+            body.emplace_back(5, 10);
             body.emplace_back(5, 8);
-            body.emplace_back(5, 7);
             body.emplace_back(5, 6);
+            direction = KEY_RIGHT;
         }
+        void Init();
         void Move();
     private:
         std::deque<Point> body;

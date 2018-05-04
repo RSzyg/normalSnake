@@ -1,18 +1,24 @@
 #include "point.h"
 #include "tools.h"
 #include <iostream>
-using std::cout;
+#include <ncurses.h>
 
 void Point::Block() {
-    SetCursorPos(_x, _y);
-    cout << "◼";
-    fflush(stdout);
+    move(_x, _y);
+    printw("◼ ");
+    refresh();
 }
 
 void Point::Circle() {
-    SetCursorPos(_x, _y);
-    cout << "●";
-    fflush(stdout);
+    move(_x, _y);
+    printw("● ");
+    refresh();
+}
+
+void Point::Clear() {
+    move(_x, _y);
+    printw("  ");
+    refresh();
 }
 
 int Point::x() {
