@@ -14,13 +14,13 @@ using std::chrono::milliseconds;
 
 void Controller::Start() {
     system("clear");
-	printw("    ■ ■ ■      ■           ■          ■          ■       ■    ■ ■ ■ ■ ■  ");
-	printw("  ■       ■    ■ ■         ■         ■ ■         ■     ■      ■          ");
-	printw("    ■          ■   ■       ■        ■   ■        ■   ■        ■          ");
-	printw("      ■        ■     ■     ■       ■ ■ ■ ■       ■ ■          ■ ■ ■ ■ ■  ");
-	printw("        ■      ■       ■   ■      ■       ■      ■   ■        ■          ");
-	printw("  ■       ■    ■         ■ ■     ■         ■     ■     ■      ■          ");
-	printw("    ■ ■ ■      ■           ■    ■           ■    ■       ■    ■ ■ ■ ■ ■  ");
+	addstr("    ■ ■ ■      ■           ■          ■          ■       ■    ■ ■ ■ ■ ■  \n");
+	addstr("  ■       ■    ■ ■         ■         ■ ■         ■     ■      ■          \n");
+	addstr("    ■          ■   ■       ■        ■   ■        ■   ■        ■          \n");
+	addstr("      ■        ■     ■     ■       ■ ■ ■ ■       ■ ■          ■ ■ ■ ■ ■  \n");
+	addstr("        ■      ■       ■   ■      ■       ■      ■   ■        ■          \n");
+	addstr("  ■       ■    ■         ■ ■     ■         ■     ■     ■      ■          \n");
+	addstr("    ■ ■ ■      ■           ■    ■           ■    ■       ■    ■ ■ ■ ■ ■  \n");
     refresh();
 }
 
@@ -30,32 +30,31 @@ void Controller::CreateScene() {
 
 void Controller::Select() {
     system("clear");
-    int ch;
-    addstr("按任意键继续。。。");
-    // system("clear");
-    refresh();
-    getch();
 }
 
 void Controller::Main() {
-    setlocale(LC_CTYPE, "");
-    initscr();
     HideCursor();
+    setlocale(LC_ALL, "");
+    initscr();
+    raw();
+    keypad(stdscr, TRUE);
+    noecho();
 
     Start();
     sleep_for(milliseconds(5000));
-    while (true) {
+    // while (true) {
         Select();
         CreateScene();
-    }
+    // }
 
-    Point *p1 = new Point(5, 5);
-    Point *p2 = new Point(8, 8);
+    Point *p1 = new Point(5, 10);
+    Point *p2 = new Point(8, 16);
     p1->Block();
     p2->Circle();
 
     sleep_for(milliseconds(5000));
 
+    endwin();
+
     ShowCursor();
-    system("stty echo");
 }
