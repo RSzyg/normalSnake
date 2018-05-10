@@ -8,6 +8,7 @@ class Controller {
         void CreateScene();
         void Main();
         void Select();
+        void Game();
     private:
         int speed;
         int score;

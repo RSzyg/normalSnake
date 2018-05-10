@@ -4,27 +4,27 @@
 #include <ncurses.h>
 
 void Point::Block() {
-    move(_x, _y);
+    move(x, y);
     printw("◼ ");
     refresh();
 }
 
 void Point::Circle() {
-    move(_x, _y);
+    move(x, y);
     printw("● ");
     refresh();
 }
 
 void Point::Clear() {
-    move(_x, _y);
+    move(x, y);
     printw("  ");
     refresh();
 }
 
-int Point::x() {
-    return _x;
+int Point::getX() {
+    return x;
 }
 
-int Point::y() {
-    return _y;
+int Point::getY() {
+    return y;
 }

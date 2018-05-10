@@ -64,18 +64,42 @@ void Controller::Main() {
     // while (true) {
         Select();
         CreateScene();
+        Game();
     // }
-
-    Snake *nsnake = new Snake();
-    nsnake->Init();
-
-    sleep_for(milliseconds(5000));
-
-    nsnake->Move();
-
-    sleep_for(milliseconds(5000));
 
     endwin();
 
     ShowCursor();
+}
+
+void Controller::Game() {
+    nodelay(stdscr, TRUE);
+    Snake *nsnake = new Snake();
+    nsnake->Init();
+    while (nsnake->Head().getX() < 24 && nsnake->Head().getY() < 44) {
+        int ch = getch();
+        move(0, 50);
+        printw("%d", ch);
+        switch (ch) {
+            case KEY_UP:
+                nsnake->ChangeDirection(ch);
+                break;
+            case KEY_DOWN:
+                nsnake->ChangeDirection(ch);
+                break;
+            case KEY_RIGHT:
+                nsnake->ChangeDirection(ch);
+                break;
+            case KEY_LEFT:
+                nsnake->ChangeDirection(ch);
+                break;
+            case 27:
+                return;
+            case ERR:
+                break;
+        }
+        nsnake->Move();
+        sleep_for(milliseconds(speed));
+    }
+    delete nsnake;
 }
