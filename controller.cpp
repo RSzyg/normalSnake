@@ -78,25 +78,8 @@ void Controller::Game() {
     nsnake->Init();
     while (nsnake->Head().getX() < 24 && nsnake->Head().getY() < 44) {
         int ch = getch();
-        move(0, 50);
-        printw("%d", ch);
-        switch (ch) {
-            case KEY_UP:
-                nsnake->ChangeDirection(ch);
-                break;
-            case KEY_DOWN:
-                nsnake->ChangeDirection(ch);
-                break;
-            case KEY_RIGHT:
-                nsnake->ChangeDirection(ch);
-                break;
-            case KEY_LEFT:
-                nsnake->ChangeDirection(ch);
-                break;
-            case 27:
-                return;
-            case ERR:
-                break;
+        if (!nsnake->ChangeDirection(ch)) {
+            return;
         }
         nsnake->Move();
         sleep_for(milliseconds(speed));

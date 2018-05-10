@@ -29,8 +29,33 @@ void Snake::Move() {
     body.pop_back();
 }
 
-void Snake::ChangeDirection(int newDirection) {
-    direction = newDirection;
+bool Snake::ChangeDirection(int ch) {
+    switch (ch) {
+        case KEY_UP:
+            if (direction != KEY_DOWN) {
+                direction = ch;
+            }
+            return true;
+        case KEY_DOWN:
+            if (direction != KEY_UP) {
+                direction = ch;
+            }
+            return true;
+        case KEY_RIGHT:
+            if (direction != KEY_LEFT) {
+                direction = ch;
+            }
+            return true;
+        case KEY_LEFT:
+            if (direction != KEY_RIGHT) {
+                direction = ch;
+            }
+            return true;
+        case ERR:
+            return true;
+        default:
+            return false;
+    }
 }
 
 Point Snake::Head() {

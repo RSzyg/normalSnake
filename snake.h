@@ -15,7 +15,7 @@ class Snake {
         }
         void Init();
         void Move();
-        void ChangeDirection(int);
+        bool ChangeDirection(int);
         Point Head();
     private:
         std::deque<Point> body;
