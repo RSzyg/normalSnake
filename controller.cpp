@@ -50,6 +50,38 @@ void Controller::CreateScene() {
 
 void Controller::Select() {
     system("clear");
+
+    move(10, 20);
+    printw("请选择难度");
+
+    move(12, 16);
+    printw("简单");
+
+    move(12, 23);
+    printw("困难");
+
+    move(12, 30);
+    printw("极难");
+
+    int ch = 0;
+    int choose = 0;
+    while (ch = getch()) {
+        switch (ch) {
+            case KEY_RIGHT:
+                if (choose < 2) {
+                    choose++;
+                }
+                break;
+            case KEY_LEFT:
+                if (choose > 0) {
+                    choose--;
+                }
+                break;
+            case '\n':
+                speed = 300 - choose * 100;
+                return;
+        }
+    }
 }
 
 void Controller::Main() {
@@ -76,7 +108,11 @@ void Controller::Game() {
     nodelay(stdscr, TRUE);
     Snake *nsnake = new Snake();
     nsnake->Init();
-    while (nsnake->Head().getX() < 24 && nsnake->Head().getY() < 44) {
+    while (nsnake->Head().getX() < 22
+        && nsnake->Head().getX() > 1
+        && nsnake->Head().getY() < 44
+        && nsnake->Head().getY() > 2
+    ) {
         int ch = getch();
         if (!nsnake->ChangeDirection(ch)) {
             return;
