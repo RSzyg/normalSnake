@@ -22,26 +22,34 @@ void Controller::Start() {
 	printw("        ■      ■       ■   ■      ■       ■      ■   ■        ■          \n");
 	printw("  ■       ■    ■         ■ ■     ■         ■     ■     ■      ■          \n");
 	printw("    ■ ■ ■      ■           ■    ■           ■    ■       ■    ■ ■ ■ ■ ■  \n");
+    printw("按任意键继续。。。");
     refresh();
+    getch();
 }
 
 void Controller::CreateScene() {
     system("clear");
 
-    Point *p1 = new Point(1, 1);
-    Point *p2 = new Point(1, 3);
-    Point *p3 = new Point(1, 5);
-    p1->Block();
-    p2->Block();
-    p3->Block();
+    for (int i = 0; i < 24; i++) {
+        Point *p = new Point(0, i * 2);
+        p->Block();
+    }
+    for (int i = 1; i < 24; i++) {
+        Point *p = new Point(i, 0);
+        p->Block();
+    }
+    for (int i = 1; i < 24; i++) {
+        Point *p = new Point(23, i * 2);
+        p->Block();
+    }
+    for (int i = 1; i < 23; i++) {
+        Point *p = new Point(i, 46);
+        p->Block();
+    }
 }
 
 void Controller::Select() {
     system("clear");
-
-    printw("按任意键继续。。。");
-    refresh();
-    getch();
 }
 
 void Controller::Main() {
@@ -53,7 +61,6 @@ void Controller::Main() {
     noecho();
 
     Start();
-    sleep_for(milliseconds(5000));
     // while (true) {
         Select();
         CreateScene();
