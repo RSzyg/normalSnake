@@ -114,6 +114,9 @@ void Controller::Game() {
         && nsnake->Head().getY() > 2
     ) {
         int ch = getch();
+        flushinp();
+        move(1, 50);
+        printw("%d", ch);
         if (!nsnake->ChangeDirection(ch)) {
             return;
         }
