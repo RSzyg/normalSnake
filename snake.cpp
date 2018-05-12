@@ -29,32 +29,34 @@ void Snake::Move() {
     body.pop_back();
 }
 
-bool Snake::ChangeDirection(int ch) {
+int Snake::ChangeDirection(int ch) {
     switch (ch) {
         case KEY_UP:
             if (direction != KEY_DOWN) {
                 direction = ch;
             }
-            return true;
+            return 2;
         case KEY_DOWN:
             if (direction != KEY_UP) {
                 direction = ch;
             }
-            return true;
+            return 2;
         case KEY_RIGHT:
             if (direction != KEY_LEFT) {
                 direction = ch;
             }
-            return true;
+            return 2;
         case KEY_LEFT:
             if (direction != KEY_RIGHT) {
                 direction = ch;
             }
-            return true;
+            return 2;
         case ERR:
-            return true;
+            return 2;
+        case 27:
+            return 0;
         default:
-            return false;
+            return 1;
     }
 }
 
