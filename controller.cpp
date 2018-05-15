@@ -3,6 +3,7 @@
 #include "point.h"
 #include "snake.h"
 #include "locale.h"
+#include "food.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -108,6 +109,9 @@ void Controller::Game() {
 	nodelay(stdscr, TRUE);
 	Snake *nsnake = new Snake();
 	nsnake->Init();
+
+	Food *nfood = new Food();
+
 	while (nsnake->Head().getX() < 22
 		&& nsnake->Head().getX() > 1
 		&& nsnake->Head().getY() < 44
@@ -118,6 +122,7 @@ void Controller::Game() {
 		int temp = 0;
 		move(1, 50);
 		printw("%d", ch);
+		refresh();
 		while (count < 20) {
 			temp = nsnake->ChangeDirection(ch);
 			if (temp == 0) {
