@@ -111,6 +111,7 @@ void Controller::Game() {
 	nsnake->Init();
 
 	Food *nfood = new Food();
+	nfood->RandomNum();
 
 	while (nsnake->Head().getX() < 22
 		&& nsnake->Head().getX() > 1
@@ -135,10 +136,7 @@ void Controller::Game() {
 			}
 			count++;
 		}
-		if (nfood->CheckPos(nsnake->Head().getX(), nsnake->Head().getY())) {
-
-		}
-		nsnake->Move();
+		nsnake->Move(*nfood);
 		sleep_for(milliseconds(speed));
 	}
 	delete nsnake;

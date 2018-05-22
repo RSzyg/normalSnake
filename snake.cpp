@@ -7,7 +7,7 @@ void Snake::Init() {
     }
 }
 
-void Snake::Move() {
+void Snake::Move(const Food& nfood) {
     switch(direction) {
         case KEY_DOWN:
             body.emplace_front(body.front().getX() + 1, body.front().getY());
@@ -26,7 +26,10 @@ void Snake::Move() {
     }
     body.front().Circle();
     body.back().Clear();
-    body.pop_back();
+
+    if (nfood.x != body.front().getX() || nfood.y != body.front().getY()) {
+        body.pop_back();
+    }
 }
 
 int Snake::ChangeDirection(int ch) {

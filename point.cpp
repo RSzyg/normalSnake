@@ -34,3 +34,11 @@ int Point::getX() {
 int Point::getY() {
     return y;
 }
+
+int Point::setX(int nx) {
+    x = nx;
+}
+
+int Point::setY(int ny) {
+    y = ny;
+}

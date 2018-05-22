@@ -4,7 +4,9 @@
 #include <deque>
 #include <ncurses.h>
 #include "point.h"
+#include "food.h"
 
+class Food;
 class Snake {
     public:
         Snake() {
@@ -14,11 +16,12 @@ class Snake {
             direction = KEY_RIGHT;
         }
         void Init();
-        void Move();
+        void Move(const Food& nfood);
         int ChangeDirection(int);
         Point Head();
     private:
         std::deque<Point> body;
+        friend class Food;
         int direction;
 };
 

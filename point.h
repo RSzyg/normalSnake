@@ -10,6 +10,8 @@ class Point {
         void Clear();
         int getX();
         int getY();
+        int setX(int nx);
+        int setY(int ny);
     private:
         int x, y;
 };
