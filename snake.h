@@ -16,7 +16,7 @@ class Snake {
             direction = KEY_RIGHT;
         }
         void Init();
-        void Move(const Food& nfood);
+        void Move(Food& nfood);
         int ChangeDirection(int);
         Point Head();
     private:

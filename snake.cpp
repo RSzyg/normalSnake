@@ -7,7 +7,7 @@ void Snake::Init() {
     }
 }
 
-void Snake::Move(const Food& nfood) {
+void Snake::Move(Food& nfood) {
     switch(direction) {
         case KEY_DOWN:
             body.emplace_front(body.front().getX() + 1, body.front().getY());
@@ -29,6 +29,8 @@ void Snake::Move(const Food& nfood) {
 
     if (nfood.x != body.front().getX() || nfood.y != body.front().getY()) {
         body.pop_back();
+    } else {
+        nfood.RandomNum();
     }
 }
 
