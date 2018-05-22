@@ -7,10 +7,11 @@
 class Food {
     public:
         Food() {
-            apple = new Point(rand() % 22 + 1, rand() % 43 + 2);
-            apple->Circle();
+            apple = new Point(rand() % 22 + 1, (rand() % 22 + 1) * 2);
+            apple->Food();
         }
         void Remove();
+        bool CheckPos(int x, int y);
     private:
         Point *apple;
 };

@@ -15,6 +15,12 @@ void Point::Circle() {
     refresh();
 }
 
+void Point::Food() {
+    move(x, y);
+    printw("🍎 ");
+    refresh();
+}
+
 void Point::Clear() {
     move(x, y);
     printw("  ");

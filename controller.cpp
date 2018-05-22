@@ -115,7 +115,7 @@ void Controller::Game() {
 	while (nsnake->Head().getX() < 22
 		&& nsnake->Head().getX() > 1
 		&& nsnake->Head().getY() < 44
-		&& nsnake->Head().getY() > 2
+		&& nsnake->Head().getY() > 3
 	) {
 		int ch = getch();
 		int count = 0;
@@ -134,6 +134,9 @@ void Controller::Game() {
 				break;
 			}
 			count++;
+		}
+		if (nfood->CheckPos(nsnake->Head().getX(), nsnake->Head().getY())) {
+
 		}
 		nsnake->Move();
 		sleep_for(milliseconds(speed));
