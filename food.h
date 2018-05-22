@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "snake.h"
 
+class Snake;
 class Food {
     public:
         Food() {
@@ -12,7 +13,7 @@ class Food {
             y = 0;
             apple = new Point(x, y);
         }
-        void RandomNum();
+        void RandomNum(Snake* nsnake);
         void Remove();
     private:
         Point *apple;

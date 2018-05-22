@@ -8,6 +8,8 @@
 #include <thread>
 #include <chrono>
 #include <ncurses.h>
+#include <stdlib.h>
+#include <time.h>
 using std::cout;
 using std::cin;
 using std::endl;
@@ -86,6 +88,7 @@ void Controller::Select() {
 }
 
 void Controller::Main() {
+	srand(time(0));
 	HideCursor();
 	setlocale(LC_ALL, "");
 	initscr();
@@ -111,7 +114,7 @@ void Controller::Game() {
 	nsnake->Init();
 
 	Food *nfood = new Food();
-	nfood->RandomNum();
+	nfood->RandomNum(nsnake);
 
 	while (nsnake->Head().getX() < 23
 		&& nsnake->Head().getX() > 0

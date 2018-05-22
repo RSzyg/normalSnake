@@ -30,7 +30,7 @@ void Snake::Move(Food& nfood) {
     if (nfood.x != body.front().getX() || nfood.y != body.front().getY()) {
         body.pop_back();
     } else {
-        nfood.RandomNum();
+        nfood.RandomNum(this);
     }
 }
 
