@@ -53,18 +53,24 @@ void Controller::CreateScene() {
 
 void Controller::Select() {
 	system("clear");
+	WINDOW *simple;
+	WINDOW *hard;
+	WINDOW *extreme;
 
-	move(10, 20);
-	printw("请选择难度");
+	simple = newwin(1, 8, 12, 24);
+	hard = newwin(1, 8, 12, 37);
+	extreme = newwin(1, 8, 12, 50);
 
-	move(12, 16);
-	printw("简单");
+	mvprintw(8, 36, "请选择难度");
 
-	move(12, 23);
-	printw("困难");
+	wbkgd(simple, COLOR_PAIR(2));
+	mvwprintw(simple, 0, 2, "简单");
+	mvwprintw(hard, 0, 2, "困难");
+	mvwprintw(extreme, 0, 2, "极难");
 
-	move(12, 30);
-	printw("极难");
+	wrefresh(simple);
+	wrefresh(hard);
+	wrefresh(extreme);
 
 	int ch = 0;
 	int choose = 0;
@@ -84,6 +90,28 @@ void Controller::Select() {
 				speed = 200 - choose * 50;
 				return;
 		}
+		switch (choose) {
+			case 0:
+				wbkgd(simple, COLOR_PAIR(2));
+				wbkgd(hard, COLOR_PAIR(1));
+				wbkgd(extreme, COLOR_PAIR(1));
+				break;
+			case 1:
+				wbkgd(simple, COLOR_PAIR(1));
+				wbkgd(hard, COLOR_PAIR(2));
+				wbkgd(extreme, COLOR_PAIR(1));
+				break;
+			case 2:
+				wbkgd(simple, COLOR_PAIR(1));
+				wbkgd(hard, COLOR_PAIR(1));
+				wbkgd(extreme, COLOR_PAIR(2));
+				break;
+			default:
+				break;
+		}
+		wrefresh(simple);
+		wrefresh(hard);
+		wrefresh(extreme);
 	}
 }
 
@@ -96,8 +124,16 @@ void Controller::Main() {
 	keypad(stdscr, TRUE);
 	noecho();
 
+	start_color();
+	init_pair(1, COLOR_WHITE, COLOR_BLACK);
+	init_pair(2, COLOR_WHITE, COLOR_CYAN);
+	bkgd(COLOR_PAIR(1));
+
 	Start();
 	// while (true) {
+		if(has_colors() == FALSE) {
+			mvprintw(5, 60, "hhhhhh");
+		}
 		Select();
 		CreateScene();
 		Game();
