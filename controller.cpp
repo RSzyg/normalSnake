@@ -117,6 +117,7 @@ void Controller::Game() {
 		&& nsnake->Head().getX() > 0
 		&& nsnake->Head().getY() < 46
 		&& nsnake->Head().getY() > 1
+		&& nsnake->HitSelf()
 	) {
 		int ch = getch();
 		int count = 0;

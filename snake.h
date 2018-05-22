@@ -18,6 +18,8 @@ class Snake {
         void Init();
         void Move(Food& nfood);
         int ChangeDirection(int);
+        int getLength();
+        bool HitSelf();
         Point Head();
     private:
         std::deque<Point> body;

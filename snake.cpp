@@ -65,6 +65,22 @@ int Snake::ChangeDirection(int ch) {
     }
 }
 
+int Snake::getLength() {
+    return body.size();
+}
+
+bool Snake::HitSelf() {
+    for (auto& point: body) {
+        if (&point == &body.front()) continue;
+        if (point.getX() == body.front().getX()
+            && point.getY() == body.front().getY()
+        ) {
+            return false;
+        }
+    }
+    return true;
+}
+
 Point Snake::Head() {
     return body.front();
 }
