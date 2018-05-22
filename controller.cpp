@@ -113,10 +113,10 @@ void Controller::Game() {
 	Food *nfood = new Food();
 	nfood->RandomNum();
 
-	while (nsnake->Head().getX() < 22
-		&& nsnake->Head().getX() > 1
-		&& nsnake->Head().getY() < 44
-		&& nsnake->Head().getY() > 3
+	while (nsnake->Head().getX() < 23
+		&& nsnake->Head().getX() > 0
+		&& nsnake->Head().getY() < 46
+		&& nsnake->Head().getY() > 1
 	) {
 		int ch = getch();
 		int count = 0;
