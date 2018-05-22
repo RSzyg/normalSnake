@@ -81,7 +81,7 @@ void Controller::Select() {
 				}
 				break;
 			case '\n':
-				speed = 300 - choose * 100;
+				speed = 200 - choose * 50;
 				return;
 		}
 	}
@@ -116,12 +116,7 @@ void Controller::Game() {
 	Food *nfood = new Food();
 	nfood->RandomNum(nsnake);
 
-	while (nsnake->Head().getX() < 23
-		&& nsnake->Head().getX() > 0
-		&& nsnake->Head().getY() < 46
-		&& nsnake->Head().getY() > 1
-		&& nsnake->HitSelf()
-	) {
+	while (nsnake->HitEdge() && nsnake->HitSelf()) {
 		int ch = getch();
 		int count = 0;
 		int temp = 0;
@@ -144,4 +139,5 @@ void Controller::Game() {
 		sleep_for(milliseconds(speed));
 	}
 	delete nsnake;
+	delete nfood;
 }

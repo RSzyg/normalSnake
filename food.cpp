@@ -5,8 +5,8 @@ void Food::Remove() {
 }
 
 void Food::RandomNum(Snake* nsnake) {
-    x = rand() % 22 + 1;
-    y = (rand() % 22 + 1) * 2;
+    x = rand() % 21 + 1;
+    y = (rand() % 21 + 1) * 2;
     for (auto& point: nsnake->body) {
         while (point.getX() == x && point.getY() == y) {
             x = rand() % 22 + 1;

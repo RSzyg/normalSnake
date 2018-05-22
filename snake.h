@@ -20,6 +20,7 @@ class Snake {
         int ChangeDirection(int);
         int getLength();
         bool HitSelf();
+        bool HitEdge();
         Point Head();
     private:
         std::deque<Point> body;

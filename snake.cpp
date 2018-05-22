@@ -81,6 +81,17 @@ bool Snake::HitSelf() {
     return true;
 }
 
+bool Snake::HitEdge() {
+    if (Head().getX() < 23
+		&& Head().getX() > 0
+		&& Head().getY() < 46
+		&& Head().getY() > 1
+    ) {
+        return true;
+    }
+    return false;
+}
+
 Point Snake::Head() {
     return body.front();
 }
