@@ -24,8 +24,8 @@ void Snake::Move(Food& nfood) {
         default:
             break;
     }
-    body.front().Circle();
     body.back().Clear();
+    body.front().Circle();
 
     if (nfood.x != body.front().getX() || nfood.y != body.front().getY()) {
         body.pop_back();
