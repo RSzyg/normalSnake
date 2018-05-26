@@ -14,7 +14,7 @@ class Food {
             apple = new Point(x, y);
         }
         void RandomNum(Snake* nsnake);
-        void Remove();
+        void PrintApple();
     private:
         Point *apple;
         int x, y;

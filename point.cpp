@@ -4,8 +4,7 @@
 #include <ncurses.h>
 
 void Point::Block() {
-    move(x, y);
-    printw("◼ ");
+    mvprintw(x, y, "◼ ");
     refresh();
 }
 

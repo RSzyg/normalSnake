@@ -4,6 +4,7 @@
 #include "snake.h"
 #include "locale.h"
 #include "food.h"
+#include "map.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -30,25 +31,10 @@ void Controller::Start() {
 	getch();
 }
 
-void Controller::CreateScene() {
+void Controller::CreateScene(Map *nmap) {
 	system("clear");
-
-	for (int i = 0; i < 24; i++) {
-		Point *p = new Point(0, i * 2);
-		p->Block();
-	}
-	for (int i = 1; i < 24; i++) {
-		Point *p = new Point(i, 0);
-		p->Block();
-	}
-	for (int i = 1; i < 24; i++) {
-		Point *p = new Point(23, i * 2);
-		p->Block();
-	}
-	for (int i = 1; i < 23; i++) {
-		Point *p = new Point(i, 46);
-		p->Block();
-	}
+	nmap->PrintMap();
+	mvprintw(10, 50, "yeyeye");
 }
 
 void Controller::Select() {
@@ -113,6 +99,10 @@ void Controller::Select() {
 		wrefresh(hard);
 		wrefresh(extreme);
 	}
+
+	delwin(simple);
+	delwin(hard);
+	delwin(extreme);
 }
 
 void Controller::Main() {
@@ -129,14 +119,16 @@ void Controller::Main() {
 	init_pair(2, COLOR_WHITE, COLOR_CYAN);
 	bkgd(COLOR_PAIR(1));
 
+	Map *nmap = new Map();
+
 	Start();
 	// while (true) {
 		if(has_colors() == FALSE) {
 			mvprintw(5, 60, "hhhhhh");
 		}
 		Select();
-		CreateScene();
-		Game();
+		CreateScene(nmap);
+		Game(nmap);
 	// }
 
 	endwin();
@@ -144,7 +136,10 @@ void Controller::Main() {
 	ShowCursor();
 }
 
-void Controller::Game() {
+void Controller::Game(Map *nmap) {
+	WINDOW* menu;
+	menu = newwin(10, 20, 8, 20);
+
 	nodelay(stdscr, TRUE);
 	Snake *nsnake = new Snake();
 	nsnake->Init();
@@ -154,15 +149,20 @@ void Controller::Game() {
 
 	while (nsnake->HitEdge() && nsnake->HitSelf()) {
 		int ch = getch();
-		int count = 0;
 		int temp = 0;
+		int count = 0;
 		move(1, 50);
 		printw("%d", ch);
 		refresh();
 		while (count < 20) {
 			temp = nsnake->ChangeDirection(ch);
 			if (temp == 0) {
-				return;
+				Menu(menu);
+				CreateScene(nmap);
+				nsnake->Init();
+				nfood->PrintApple();
+				sleep_for(milliseconds(200));
+				break;
 			} else if (temp == 1) {
 				ch = getch();
 			} else{
@@ -176,4 +176,15 @@ void Controller::Game() {
 	}
 	delete nsnake;
 	delete nfood;
+}
+
+void Controller::Menu(WINDOW *menu) {
+	system("clear");
+	nodelay(stdscr, FALSE);
+	box(menu, 0 , 0);
+	mvwprintw(menu, 0, 0, "hahahahaha");
+	wrefresh(menu);
+	getch();
+	delwin(menu);
+	nodelay(stdscr, TRUE);
 }

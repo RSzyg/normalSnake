@@ -3,6 +3,7 @@
 
 void Snake::Init() {
     for (auto& point: body) {
+        point.Clear();
         point.Circle();
     }
 }
