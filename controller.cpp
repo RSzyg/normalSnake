@@ -129,21 +129,21 @@ void Controller::Main() {
 	Map *nmap = new Map();
 
 	Start();
-	// while (true) {
+	Select();
+	while (true) {
 		if(has_colors() == FALSE) {
 			mvprintw(5, 60, "hhhhhh");
 		}
-		Select();
 		CreateScene(nmap);
-		Game(nmap);
-	// }
+		if (Game(nmap) == 1) break;
+	}
 
 	endwin();
 
 	ShowCursor();
 }
 
-void Controller::Game(Map *nmap) {
+int Controller::Game(Map *nmap) {
 	nodelay(stdscr, TRUE);
 	Snake *nsnake = new Snake();
 	nsnake->Init();
@@ -161,8 +161,9 @@ void Controller::Game(Map *nmap) {
 		while (count < 20) {
 			temp = nsnake->ChangeDirection(ch);
 			if (temp == 0) {
-				Menu();
-				sleep_for(milliseconds(200));
+				int choose = Menu();
+				if (choose == 1) return 1;
+				else if (choose == 2) return 2;
 				break;
 			} else if (temp == 1) {
 				ch = getch();
@@ -225,6 +226,10 @@ int Controller::Menu() {
 				wrefresh(Back);
 				wrefresh(Exit);
 				wrefresh(Restart);
+
+				delwin(Back);
+				delwin(Exit);
+				delwin(Restart);
 				return choose;
 		}
 		switch (choose) {
@@ -248,21 +253,4 @@ int Controller::Menu() {
 		wrefresh(Exit);
 		wrefresh(Restart);
 	}
-
-	werase(Back);
-	werase(Exit);
-	werase(Restart);
-	wbkgd(Back, COLOR_PAIR(1));
-	wbkgd(Exit, COLOR_PAIR(1));
-	wbkgd(Restart, COLOR_PAIR(1));
-
-	wrefresh(Back);
-	wrefresh(Exit);
-	wrefresh(Restart);
-
-	delwin(Back);
-	delwin(Exit);
-	delwin(Restart);
-
-	nodelay(stdscr, TRUE);
 }

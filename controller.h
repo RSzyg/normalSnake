@@ -10,7 +10,7 @@ class Controller {
         void CreateScene(Map*);
         void Main();
         void Select();
-        void Game(Map*);
+        int Game(Map*);
         int Menu();
     private:
         int speed;
