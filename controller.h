@@ -1,7 +1,6 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include <ncurses.h>
 #include "map.h"
 
 class Controller {
@@ -12,7 +11,7 @@ class Controller {
         void Main();
         void Select();
         void Game(Map*);
-        void Menu(WINDOW *menu);
+        int Menu();
     private:
         int speed;
         int score;

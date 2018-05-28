@@ -34,7 +34,6 @@ void Controller::Start() {
 void Controller::CreateScene(Map *nmap) {
 	system("clear");
 	nmap->PrintMap();
-	mvprintw(10, 50, "yeyeye");
 }
 
 void Controller::Select() {
@@ -100,6 +99,14 @@ void Controller::Select() {
 		wrefresh(extreme);
 	}
 
+	werase(simple);
+	werase(hard);
+	werase(extreme);
+
+	wrefresh(simple);
+	wrefresh(hard);
+	wrefresh(extreme);
+
 	delwin(simple);
 	delwin(hard);
 	delwin(extreme);
@@ -137,9 +144,6 @@ void Controller::Main() {
 }
 
 void Controller::Game(Map *nmap) {
-	WINDOW* menu;
-	menu = newwin(10, 20, 8, 20);
-
 	nodelay(stdscr, TRUE);
 	Snake *nsnake = new Snake();
 	nsnake->Init();
@@ -157,10 +161,7 @@ void Controller::Game(Map *nmap) {
 		while (count < 20) {
 			temp = nsnake->ChangeDirection(ch);
 			if (temp == 0) {
-				Menu(menu);
-				CreateScene(nmap);
-				nsnake->Init();
-				nfood->PrintApple();
+				Menu();
 				sleep_for(milliseconds(200));
 				break;
 			} else if (temp == 1) {
@@ -178,13 +179,90 @@ void Controller::Game(Map *nmap) {
 	delete nfood;
 }
 
-void Controller::Menu(WINDOW *menu) {
-	system("clear");
+int Controller::Menu() {
 	nodelay(stdscr, FALSE);
-	box(menu, 0 , 0);
-	mvwprintw(menu, 0, 0, "hahahahaha");
-	wrefresh(menu);
-	getch();
-	delwin(menu);
+
+	WINDOW *Back;
+	WINDOW *Exit;
+	WINDOW *Restart;
+
+	Back = newwin(1, 21, 8, 50);
+	Exit = newwin(1, 21, 12, 50);
+	Restart = newwin(1, 21, 16, 50);
+
+	wbkgd(Back, COLOR_PAIR(2));
+	mvwprintw(Back, 0, 6, "返回游戏");
+	mvwprintw(Exit, 0, 6, "退出游戏");
+	mvwprintw(Restart, 0, 6, "重新开始");
+
+	wrefresh(Back);
+	wrefresh(Exit);
+	wrefresh(Restart);
+
+	int ch = 0;
+	int choose = 0;
+	while (ch = getch()) {
+		switch (ch) {
+			case KEY_DOWN:
+				if (choose < 2) {
+					choose++;
+				}
+				break;
+			case KEY_UP:
+				if (choose > 0) {
+					choose--;
+				}
+				break;
+			case '\n':
+				nodelay(stdscr, TRUE);
+				werase(Back);
+				werase(Exit);
+				werase(Restart);
+				wbkgd(Back, COLOR_PAIR(1));
+				wbkgd(Exit, COLOR_PAIR(1));
+				wbkgd(Restart, COLOR_PAIR(1));
+
+				wrefresh(Back);
+				wrefresh(Exit);
+				wrefresh(Restart);
+				return choose;
+		}
+		switch (choose) {
+			case 0:
+				wbkgd(Back, COLOR_PAIR(2));
+				wbkgd(Exit, COLOR_PAIR(1));
+				wbkgd(Restart, COLOR_PAIR(1));
+				break;
+			case 1:
+				wbkgd(Back, COLOR_PAIR(1));
+				wbkgd(Exit, COLOR_PAIR(2));
+				wbkgd(Restart, COLOR_PAIR(1));
+				break;
+			case 2:
+				wbkgd(Back, COLOR_PAIR(1));
+				wbkgd(Exit, COLOR_PAIR(1));
+				wbkgd(Restart, COLOR_PAIR(2));
+				break;
+		}
+		wrefresh(Back);
+		wrefresh(Exit);
+		wrefresh(Restart);
+	}
+
+	werase(Back);
+	werase(Exit);
+	werase(Restart);
+	wbkgd(Back, COLOR_PAIR(1));
+	wbkgd(Exit, COLOR_PAIR(1));
+	wbkgd(Restart, COLOR_PAIR(1));
+
+	wrefresh(Back);
+	wrefresh(Exit);
+	wrefresh(Restart);
+
+	delwin(Back);
+	delwin(Exit);
+	delwin(Restart);
+
 	nodelay(stdscr, TRUE);
 }
